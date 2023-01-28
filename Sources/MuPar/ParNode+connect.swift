@@ -11,12 +11,12 @@ public extension ParNode {
      
      - Parameters:
         - name: name of node to find
-        - visitor: track nodes already visited to break loops
+        - visit: track nodes already visited to break loops
      */
-    func findLeft(_ name: String, _ visitor: Visitor) -> ParNode? {
+    func findLeft(_ name: String, _ visit: Visitor) -> ParNode? {
 
         // haven't been here before, so check it out
-        if visitor.newVisit(id) {
+        if visit.newVisit(id) {
             
             // name refers to a left-node, residing here
             if [.def,.and,.or].contains(parOp),
@@ -28,13 +28,13 @@ public extension ParNode {
             }
             // check for siblings which haven't been visited
             for edgeNext in edgeNexts {
-                if let node = edgeNext.nodeNext?.findLeft(name, visitor) {
+                if let node = edgeNext.nodeNext?.findLeft(name, visit) {
                     return node
                 }
             }
             // check for aunts/uncles which haven't been visited
             for edgePrev in edgePrevs {
-                if let node = edgePrev.nodePrev?.findLeft(name, visitor) {
+                if let node = edgePrev.nodePrev?.findLeft(name, visit) {
                     return node
                 }
             }
@@ -46,12 +46,12 @@ public extension ParNode {
      ParNode may refer to more complete definition, elsewhere.
      So, copy the more complete definition's edges
      
-     - Parameter visitor: track nodes already visited to break loops
+     - Parameter visit: track nodes already visited to break loops
      */
-    internal func connectReferences(_ visitor: Visitor) {
+    internal func connectReferences(_ visit: Visitor) {
         
         /// deja vu? if already been here, then skip
-        if !visitor.newVisit(id) { return }
+        if !visit.newVisit(id) { return }
         
         /** name has no suffixes, so real definition must reside somewhere else */
         func nameRefersToDefinitionElsewhere() -> Bool {
@@ -93,7 +93,7 @@ public extension ParNode {
             findAndSubstituteEdges()
         }
         for edgeNext in edgeNexts {
-            edgeNext.nodeNext?.connectReferences(visitor)
+            edgeNext.nodeNext?.connectReferences(visit)
         }
     }
     
@@ -106,9 +106,9 @@ public extension ParNode {
             a (b | (c | d)*)   ⟹  no change
             a (b | (c | d)*)?  ⟹  no change
      
-     - Parameter visitor: track nodes already visited to break loops
+     - Parameter visit: track nodes already visited to break loops
      */
-    internal func distillSuffixs(_ visitor: Visitor) {
+    internal func distillSuffixs(_ visit: Visitor) {
         
         /**
         nested suffix is extension of self
@@ -142,7 +142,7 @@ public extension ParNode {
                 if let nodeNext = edgeNext.nodeNext,
                     isSelfRecursive(nodeNext) {
                     
-                    nodeNext.distillSuffixs(visitor)
+                    nodeNext.distillSuffixs(visit)
                     
                     for edgeNext2 in nodeNext.edgeNexts {
                         edgeNext2.nodePrev = self
@@ -157,7 +157,7 @@ public extension ParNode {
         }
         
         /// deja vu? if already been here, then skip
-        if !visitor.newVisit(id) { return }
+        if !visit.newVisit(id) { return }
   
         if [.or].contains(parOp),
             edgeNexts.count > 0 {
@@ -171,7 +171,7 @@ public extension ParNode {
             }
         }
         for edgeNext in edgeNexts {
-            edgeNext.nodeNext?.distillSuffixs(visitor)
+            edgeNext.nodeNext?.distillSuffixs(visit)
         }
     }
     

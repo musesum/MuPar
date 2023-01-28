@@ -8,9 +8,9 @@ import Foundation
 
 public extension ParNode {
     
-    func printGraph(_ visitor: Visitor, _ level: Int = 0) {
+    func printGraph(_ visit: Visitor, _ level: Int = 0) {
         
-        if visitor.newVisit(id) {
+        if visit.newVisit(id) {
 
             var left = "⦙ " + " ".padding(toLength: level, withPad: " ", startingAt: 0)
             for edgePrev in edgePrevs {
@@ -32,7 +32,7 @@ public extension ParNode {
             print (left + center + right)
 
             for edgeNext in edgeNexts {
-                edgeNext.nodeNext?.printGraph(visitor, level+1)
+                edgeNext.nodeNext?.printGraph(visit, level+1)
             }
         }
     }

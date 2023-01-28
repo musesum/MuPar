@@ -40,16 +40,16 @@ public class TestNLP {
         }
         return TestFound("", nil, -1)
     }
-    func parseParItem(_ parItem: ParItem, _ model: TestModel, _ visitor: Visitor) {
+    func parseParItem(_ parItem: ParItem, _ model: TestModel, _ visit: Visitor) {
 
         if let node = parItem.node,
-           !visitor.newVisit(node.id) {
+           !visit.newVisit(node.id) {
             return
         }
 
         if parItem.nextPars.count > 0 {
             for nextPar in parItem.nextPars {
-                parseParItem(nextPar, model, visitor)
+                parseParItem(nextPar, model, visit)
             }
         }
         else if parItem.value != nil {
