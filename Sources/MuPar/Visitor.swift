@@ -46,7 +46,7 @@ public struct VisitFrom: OptionSet {
     public var user   : Bool { contains(.user  ) }
     public var model  : Bool { contains(.model ) }
     public var midi   : Bool { contains(.midi  ) }
-    public var tween  : Bool { contains(.tween ) }
+    public var tween  : Bool { contains(.tween ) } // fucking git 
 
     public static func + (lhs: VisitFrom, rhs: VisitFrom) -> VisitFrom {
         return VisitFrom(rawValue: lhs.rawValue | rhs.rawValue)
