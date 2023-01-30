@@ -6,12 +6,12 @@ public struct VisitFrom: OptionSet {
 
     public let rawValue: Int
 
-    public static let model   = VisitFrom(rawValue: 1 << 0) // 1
-    public static let canvas  = VisitFrom(rawValue: 1 << 1) // 2
-    public static let user    = VisitFrom(rawValue: 1 << 2) // 4
-    public static let remote  = VisitFrom(rawValue: 1 << 3) // 8
-    public static let midi    = VisitFrom(rawValue: 1 << 4) // 16
-    public static let animate = VisitFrom(rawValue: 1 << 5) // 32
+    public static let model  = VisitFrom(rawValue: 1 << 0) // 1
+    public static let canvas = VisitFrom(rawValue: 1 << 1) // 2
+    public static let user   = VisitFrom(rawValue: 1 << 2) // 4
+    public static let remote = VisitFrom(rawValue: 1 << 3) // 8
+    public static let midi   = VisitFrom(rawValue: 1 << 4) // 16
+    public static let tween  = VisitFrom(rawValue: 1 << 5) // 32
     public init(rawValue: Int = 0) { self.rawValue = rawValue }
 
     static public var debugDescriptions: [(Self, String)] = [
@@ -20,7 +20,7 @@ public struct VisitFrom: OptionSet {
         (.user   , "user"   ),
         (.remote , "remote" ),
         (.remote , "midi"   ),
-        (.animate, "animate"),
+        (.tween  , "tween"  ),
     ]
     static public var logDescriptions: [(Self, String)] = [
         (.model  , "􀬎"),
@@ -28,7 +28,7 @@ public struct VisitFrom: OptionSet {
         (.user   , "􀉩"),
         (.remote , "􀤆"),
         (.midi   , "􀑪"),
-        (.animate, "􀎶"),
+        (.tween  , "􀎶"),
     ]
 
     public var description: String {
@@ -41,15 +41,19 @@ public struct VisitFrom: OptionSet {
         let joined = result.joined(separator: "")
        return joined
     }
-    public var remote  : Bool { contains(.remote ) }
-    public var user    : Bool { contains(.user   ) }
-    public var model   : Bool { contains(.model  ) }
-    public var midi    : Bool { contains(.midi   ) }
-    public var animate : Bool { contains(.animate) }
-    public var canvas  : Bool { contains(.animate) }
+    public var remote : Bool { contains(.remote) }
+    public var canvas : Bool { contains(.canvas) }
+    public var user   : Bool { contains(.user  ) }
+    public var model  : Bool { contains(.model ) }
+    public var midi   : Bool { contains(.midi  ) }
+    public var tween  : Bool { contains(.tween ) }
 
     public static func + (lhs: VisitFrom, rhs: VisitFrom) -> VisitFrom {
-        return VisitFrom(rawValue: lhs.rawValue & rhs.rawValue)
+        return VisitFrom(rawValue: lhs.rawValue | rhs.rawValue)
+    }
+
+    public static func += (lhs: inout VisitFrom, rhs: VisitFrom) {
+        lhs = lhs + rhs
     }
 }
 
@@ -103,7 +107,6 @@ public class Visitor {
     public func isLocal() -> Bool {
         return !from.remote
     }
-
     public func newVisit(_ id: Int) -> Bool {
         if wasHere(id) {
             return false
