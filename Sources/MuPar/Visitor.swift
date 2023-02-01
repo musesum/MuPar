@@ -6,23 +6,26 @@ public struct VisitFrom: OptionSet {
 
     public let rawValue: Int
 
-    public static let model  = VisitFrom(rawValue: 1 << 0) // 1
-    public static let canvas = VisitFrom(rawValue: 1 << 1) // 2
-    public static let user   = VisitFrom(rawValue: 1 << 2) // 4
-    public static let remote = VisitFrom(rawValue: 1 << 3) // 8
-    public static let midi   = VisitFrom(rawValue: 1 << 4) // 16
-    public static let tween  = VisitFrom(rawValue: 1 << 5) // 32
+    public static let bind   = VisitFrom(rawValue: 1 << 0) // 1
+    public static let model  = VisitFrom(rawValue: 1 << 1) // 2
+    public static let canvas = VisitFrom(rawValue: 1 << 2) // 4
+    public static let user   = VisitFrom(rawValue: 1 << 3) // 8
+    public static let remote = VisitFrom(rawValue: 1 << 4) // 16
+    public static let midi   = VisitFrom(rawValue: 1 << 5) // 32
+    public static let tween  = VisitFrom(rawValue: 1 << 6) // 64
     public init(rawValue: Int = 0) { self.rawValue = rawValue }
 
     static public var debugDescriptions: [(Self, String)] = [
-        (.model  , "model"  ),
-        (.canvas , "canvas" ),
-        (.user   , "user"   ),
-        (.remote , "remote" ),
-        (.remote , "midi"   ),
-        (.tween  , "tween"  ),
+        (.bind   , "bind"  ),
+        (.model  , "model" ),
+        (.canvas , "canvas"),
+        (.user   , "user"  ),
+        (.remote , "remote"),
+        (.remote , "midi"  ),
+        (.tween  , "tween" ),
     ]
     static public var logDescriptions: [(Self, String)] = [
+        (.bind   , "􁀘"),
         (.model  , "􀬎"),
         (.canvas , "􀏅"),
         (.user   , "􀉩"),
@@ -41,6 +44,7 @@ public struct VisitFrom: OptionSet {
         let joined = result.joined(separator: "")
        return joined
     }
+    public var bind   : Bool { contains(.bind  ) }
     public var remote : Bool { contains(.remote) }
     public var canvas : Bool { contains(.canvas) }
     public var user   : Bool { contains(.user  ) }
