@@ -22,8 +22,7 @@ public class ParRecents: ParMatching {
         for parItem in parItems {
             if parItem.time < cutoffTime {
                 removeCount += 1
-            }
-            else {
+            } else {
                 break
             }
         }

@@ -59,8 +59,8 @@ public class ParRepetitions {
                 } else {
                     repMin = 0                      // 2 in `{,2}`
                 }
-            }
-            else if c == "}" {
+            } else if c == "}" {
+                
                 if comma == 0, i > 1 {              // 2 in `{2}`
                     repMax = Int(input[1 ..< i])!
                     repMin = repMax

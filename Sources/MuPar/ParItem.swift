@@ -129,9 +129,10 @@ public class ParItem {
         var result = [String]()
         for nextPar in nextPars {
             if let value = nextPar.value {
+
                 result.append(value)
-            }
-            else if let pattern = nextPar.node?.pattern,
+
+            } else if let pattern = nextPar.node?.pattern,
                 keys.contains(pattern) {
 
                 for nextPari in nextPar.nextPars {

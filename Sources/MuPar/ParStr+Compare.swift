@@ -24,8 +24,7 @@ public extension ParStr {
             print ("expect ⟹ " + expectedErr)
             print ("actual ⟹ " + actualErr + "\n")
             return 1 // error
-        }
-        else {
+        } else {
             print ("⟹ " + expected + " ✓\n")
             return 0 // no error
         }
@@ -88,8 +87,7 @@ public extension ParStr {
         if  i1 == sub1.endIndex,
             i2 == sub2.endIndex {
             return nil
-        }
-        else {
+        } else {
             return makeError()
         }
     }

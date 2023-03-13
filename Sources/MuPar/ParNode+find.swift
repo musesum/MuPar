@@ -135,8 +135,7 @@ public extension ParNode {
         if let parItem = matching.parLast {
             foundCall?(parItem)
             parStr.trace(self, parItem, level)
-        }
-        else {
+        } else {
             parStr.putSnapshot(snapshot) // pop
         }
         return matching

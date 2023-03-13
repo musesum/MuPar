@@ -46,17 +46,17 @@ public class TestNLP {
            !visit.newVisit(node.id) {
             return
         }
-
+        
         if parItem.nextPars.count > 0 {
             for nextPar in parItem.nextPars {
                 parseParItem(nextPar, model, visit)
             }
-        }
-        else if parItem.value != nil {
+        } else if parItem.value != nil {
+            
             switch parItem.value {
-            case "show": model.show = true
-            case "hide": model.show = false
-            default: break
+                case "show": model.show = true
+                case "hide": model.show = false
+                default: break
             }
         }
     }

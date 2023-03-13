@@ -123,10 +123,12 @@ public class ParMatching {
         var promotedNextPars = [ParItem]()
         for parItem in parItems {
             if let promotePars = promoteNextPars(parItem) {
+                
                 hasPromotePars = true
                 promotedNextPars.append(contentsOf: promotePars)
-            }
-            else {
+
+            } else {
+
                 promotedNextPars.append(parItem)
             }
         }

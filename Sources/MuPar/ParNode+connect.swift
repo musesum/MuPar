@@ -123,8 +123,7 @@ public extension ParNode {
                 next.reps.repMin == reps.repMin &&
                 next.edgePrevs.count == 1 {
                 return true
-            }
-            else {
+            } else {
                 return false
             }
         }

@@ -161,8 +161,7 @@ public class Par {
         if let parNode = Par.par.findPath(searchStr) {
             
             parNode.foundCall = foundCall
-        }
-        else {
+        } else {
             print("🚫 \(#function)(\"\(str)\") lost at \"\(parStr.sub)\"")
         }
     }

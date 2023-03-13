@@ -75,8 +75,7 @@ public class ParStr {
             if withEmpty {
                 return ParMatching( ParItem(node,""), ok: true)
             }
-        }
-        else if pat.count <= sub.count, sub.hasPrefix(pat) {
+        } else if pat.count <= sub.count, sub.hasPrefix(pat) {
             
             sub = pat.count < sub.count
                 ? sub[ sub.index(sub.startIndex, offsetBy: pat.count) ..< sub.endIndex]
@@ -126,8 +125,7 @@ public class ParStr {
         
         if sub.count <= 0 {
             return del.padding(toLength: length, withPad: " ", startingAt: 0) + del + " "
-        }
-        else {
+        } else {
             let endIndex = min(length, sub.count)
             let subEnd = sub.index(sub.startIndex, offsetBy: endIndex)
             let subStr = sub.count > 0 ? String(sub[sub.startIndex ..< subEnd]) : " "

@@ -158,8 +158,7 @@ public class ParWords: ParStr {
             if word == node.pattern {
                 found[i] = abs(starti-i)
                 return true
-            }
-            else {
+            } else {
                 return false
             }
         }
@@ -249,8 +248,7 @@ public class ParWords: ParStr {
                 let matching = rangeRegx.matching {
                 let result = String(str[matching])
                 return result
-            }
-            else {
+            } else {
                 return nil
             }
         }

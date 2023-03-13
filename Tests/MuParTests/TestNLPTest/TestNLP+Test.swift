@@ -22,8 +22,7 @@ extension TestNLP {
             "⦙  Predecessor                  Node                    Successors ")
             root.printGraph(Visitor(0)) // print the parse graph
             print("-----------------------------------------------------------------")
-        }
-        else {
+        } else {
             err = 1
         }
         return err
@@ -43,8 +42,7 @@ extension TestNLP {
                 let totalHops = parItem.totalHops()
                 print("\(foundString) ⟹ hops:\(totalHops) ✔︎")
                 return 0
-            }
-            else  {
+            } else {
                 print("🚫 failed")
                 return 1
             }

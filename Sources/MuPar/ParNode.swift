@@ -164,8 +164,7 @@ public class ParNode {
                 print("\(foundNode.nodeStrId()) = \(String(describing: matchStr))")
                 foundNode.matchStr = matchStr
             }
-        }
-        else {
+        } else {
             print("🚫 setMatch couldn't find: \(str)")
         }
     }
@@ -173,8 +172,7 @@ public class ParNode {
     public func go(_ parStr: ParStr, _ nodeValCall: @escaping ParItemVoid) {
         if let parItem = findMatch(parStr).parLast {
             nodeValCall(parItem)
-        }
-        else {
+        } else {
             print("🚫 \(#function)(\"\(parStr.str)\") not found")
         }
     }
