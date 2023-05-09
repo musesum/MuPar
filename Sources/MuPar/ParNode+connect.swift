@@ -19,7 +19,7 @@ public extension ParNode {
         if visit.newVisit(id) {
             
             // name refers to a left-node, residing here
-            if [.def,.and,.or].contains(parOp),
+            if parOp.isIn([.def,.and,.or]),
                 pattern.count > 0,
                 pattern == name,
                 edgeNexts.count > 0 {

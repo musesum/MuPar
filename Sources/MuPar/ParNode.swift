@@ -32,6 +32,9 @@ public class ParNode {
         rgx   = "'",  // regular expression - true if matches pattern
         quo   = "\"", // quote - true if path matches pattern
         match = "()"  // function - false if nil, true when returning a string
+        func isIn(_ elements: [ParOp]) -> Bool {
+            return elements.contains(self)
+        }
     }
     var parOp = ParOp.quo         // type of operation on parseStr
 
