@@ -23,6 +23,25 @@ extension ParItem {
 
     /// reduce strand ParItem to only those that match keywords
     public func reduce(_ keywords: [String: Any]) -> [ParItem] {
+        
+        if value != nil { return [self] }
+
+        var reduction = [ParItem]()
+
+        if isEmptyRgx() {
+            return reduction
+        }
+        for nexti in nextPars {
+            let reduced = nexti.reduce(keywords)
+            reduction.append(contentsOf: reduced)
+        }
+        // self's node is a keyword, so keep it
+        if let pattern = node?.pattern,
+           keywords[pattern] != nil {
+            nextPars = reduction
+            return [self]
+        }
+        return reduction
 
         /// regular expression
         func isRgx(_ node: ParNode) -> Bool {
@@ -46,26 +65,6 @@ extension ParItem {
             }
             return false
         }
-        // begin ---------------------------
-
-        if value != nil { return [self] }
-
-        var reduction = [ParItem]()
-
-        if isEmptyRgx() {
-            return reduction
-        }
-        for nexti in nextPars {
-            let reduced = nexti.reduce(keywords)
-            reduction.append(contentsOf: reduced)
-        }
-        // self's node is a keyword, so keep it
-        if let pattern = node?.pattern,
-           keywords[pattern] != nil {
-            nextPars = reduction
-            return [self]
-        }
-        return reduction
     }
 
     public func reduceStart(_ keywords: [String: Any]) -> ParItem {

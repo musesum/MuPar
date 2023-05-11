@@ -240,26 +240,11 @@ public class ParWords: ParStr {
         if node.regx == nil {
             return ParMatching(nil, ok: false)
         }
-
-        func match(_ i: Int) -> String? {
-            let word = words[i]
-            if  let regx = node.regx,
-                let rangeRegx = matchRegxWord(regx, word),
-                let matching = rangeRegx.matching {
-                let result = String(str[matching])
-                return result
-            } else {
-                return nil
-            }
-        }
-
-        // begin -----------------------------------------
-
         // search forward from last match
         if starti < words.count {
             for index in starti ..< words.count {
                 if let word = match(index) {
-                
+
                     let parItem = advancePar(node, index, word)
                     return ParMatching(parItem, ok: true)
                 }
@@ -278,14 +263,14 @@ public class ParWords: ParStr {
         }
         // test unclaimed keywords in short term memory
         if parRecents.parItems.count > 0,
-            node.reps.repMin >= 1 {
-
+           node.reps.repMin >= 1 {
+            
             for parItem in parRecents.parItems.reversed() {
                 if  let id = parItem.node?.id, id == node.id,
                     let word = parItem.value,
                     let regx = node.regx,
                     let _ = matchRegxWord(regx, word) {
-
+                    
                     let deltaTime = time - parItem.time
                     let parItem = advancePar(node, words.count, word, deltaTime)
                     return ParMatching(parItem, ok: true)
@@ -293,6 +278,18 @@ public class ParWords: ParStr {
             }
         }
         return ParMatching(nil, ok: false)
+        
+        func match(_ i: Int) -> String? {
+            let word = words[i]
+            if  let regx = node.regx,
+                let rangeRegx = matchRegxWord(regx, word),
+                let matching = rangeRegx.matching {
+                let result = String(str[matching])
+                return result
+            } else {
+                return nil
+            }
+        }
+        
     }
-
 }
