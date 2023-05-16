@@ -149,10 +149,8 @@ Here is a complete Par definition for the functional data flow graph, called Flo
 flo ≈ left right* {
 
     left ≈ (path | name)
-    right ≈ (hash | time | value | child | many | copyat | array | edges | embed | comment)+
+    right ≈ (value | child | many | copyat | array | edges | embed | comment)+
 
-    hash ≈ "#" num
-    time ≈ "~" num
     child ≈ "{" comment* flo+ "}" | "." flo+
     many ≈ "." "{" flo+ "}"
     array ≈ "[" thru "]"
@@ -163,8 +161,9 @@ flo ≈ left right* {
 
     scalar ≈ "(" scalar1 ")"
     scalars ≈ "(" scalar1 ("," scalar1)* ")"
-    scalar1 ≈ (thru | modu | data | num) {
+    scalar1 ≈ (thru | thri | modu | data | num) {
         thru ≈ num ("..." | "…") num dflt? now?
+        thri ≈ num ("_") num dflt? now?
         modu ≈ "%" num dflt? now?
         index ≈ "[" (name | num) "]"
         data ≈ "*"
@@ -177,7 +176,7 @@ flo ≈ left right* {
     }
     edges ≈ edgeOp (edgePar | exprs | edgeItem) comment* {
 
-        edgeOp ≈ '^([<←][<!@⟐⟡◇→>]+|[!@⟐⟡◇→>]+[>→])'
+        edgeOp ≈ '^([<←][<!\^@⟐⟡◇→>]+|[!\^@⟐⟡◇→>]+[>→])'
         edgePar ≈ "(" edgeItem+ ")" edges?
         edgeItem ≈ (edgeVal | ternary) comment*
         edgeVal ≈ (path | name) (edges+ | value)?
