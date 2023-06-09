@@ -25,7 +25,7 @@ public extension ParStr {
             print ("actual ⟹ " + actualErr + "\n")
             return 1 // error
         } else {
-            print ("⟹ " + expected + " ✓\n")
+            print ("🧪 " + expected + " ✓\n")
             return 0 // no error
         }
     }
