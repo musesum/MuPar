@@ -68,7 +68,7 @@ public class Visitor {
     public static func nextId() -> Int { Id += 1; return Id }
 
     private var lock = NSLock()
-    private var visited = Set<Int>()
+    public var visited = Set<Int>()
 
     public var from: VisitFrom
 
