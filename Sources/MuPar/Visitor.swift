@@ -1,6 +1,7 @@
 //  Created by warren on 7/7/17.
 
 import Foundation
+import Collections
 
 public struct VisitFrom: OptionSet {
 
@@ -68,14 +69,10 @@ public class Visitor {
     public static func nextId() -> Int { Id += 1; return Id }
 
     private var lock = NSLock()
-    public var visited = Set<Int>()
+    public var visited = OrderedSet<Int>()
 
     public var from: VisitFrom
 
-    public init(copy: Visitor) {
-        self.from = copy.from
-        self.visited = copy.visited
-    }
     public init (_ ids: [Int?], from: VisitFrom = .model ) {
         self.from = from
         nowHeres(ids)
@@ -87,17 +84,21 @@ public class Visitor {
     public init (_ from: VisitFrom) {
         self.from = from
     }
-
+    public func remove(_ id: Int) {
+        lock.lock()
+        visited.remove(id)
+        lock.unlock()
+    }
     public func nowHere(_ id: Int) {
         lock.lock()
-        visited.insert(id)
+        visited.append(id)
         lock.unlock()
     }
     public func nowHeres(_ ids: [Int?]) {
         lock.lock()
         for id in ids {
             if let id {
-                visited.insert(id)
+                visited.append(id)
             }
         }
         lock.unlock()

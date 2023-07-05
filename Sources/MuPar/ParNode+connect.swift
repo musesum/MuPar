@@ -14,29 +14,28 @@ public extension ParNode {
         - visit: track nodes already visited to break loops
      */
     func findLeft(_ name: String, _ visit: Visitor) -> ParNode? {
-
+        
         // haven't been here before, so check it out
         if visit.newVisit(id) {
+        
+        // name refers to a left-node, residing here
+        if parOp.isIn([.def,.and,.or]),
+           pattern.count > 0,
+           pattern == name,
+           edgeNexts.count > 0 {
             
-            // name refers to a left-node, residing here
-            if parOp.isIn([.def,.and,.or]),
-                pattern.count > 0,
-                pattern == name,
-                edgeNexts.count > 0 {
-                
-                return self
+            return self
+        }
+        // check for siblings which haven't been visited
+        for edgeNext in edgeNexts {
+            if let node = edgeNext.nodeNext?.findLeft(name, visit) {
+                return node
             }
-            // check for siblings which haven't been visited
-            for edgeNext in edgeNexts {
-                if let node = edgeNext.nodeNext?.findLeft(name, visit) {
-                    return node
-                }
-            }
-            // check for aunts/uncles which haven't been visited
-            for edgePrev in edgePrevs {
-                if let node = edgePrev.nodePrev?.findLeft(name, visit) {
-                    return node
-                }
+        }
+        // check for aunts/uncles which haven't been visited
+        for edgePrev in edgePrevs {
+            if let node = edgePrev.nodePrev?.findLeft(name, visit) {
+                return node
             }
         }
         return nil
