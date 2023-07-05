@@ -16,7 +16,7 @@ public extension ParNode {
     func findLeft(_ name: String, _ visit: Visitor) -> ParNode? {
         
         // haven't been here before, so check it out
-        if visit.newVisit(id) {
+        guard visit.newVisit(id) else { return nil }
         
         // name refers to a left-node, residing here
         if parOp.isIn([.def,.and,.or]),
