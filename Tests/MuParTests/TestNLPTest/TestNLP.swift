@@ -6,6 +6,7 @@
 
 import Foundation
 import MuPar
+import MuVisit
 
 /// This is a toy natural langauge parsing example
 ///

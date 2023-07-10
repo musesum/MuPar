@@ -5,6 +5,7 @@
 //  License: Apache 2.0 - see License file
 
 import Foundation
+import MuVisit
 
 public typealias ParItemVoid = (_ parItem: Any) -> Void
 public typealias ParStrMatch = (_ parStr: ParStr, _ level: Int) -> ParMatching?

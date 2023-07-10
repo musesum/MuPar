@@ -4,6 +4,8 @@
 //  Copyright © 2017 DeepMuse
 //  License: Apache 2.0 - see License file
 
+import MuVisit
+
 public extension ParNode {
     
     /**

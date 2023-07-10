@@ -5,6 +5,7 @@
 //  License: Apache 2.0 - see License file
 
 import Foundation
+import MuVisit
 
 /// Parse a script into a new graph, using static `par` graph
 public class Par {
