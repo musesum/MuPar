@@ -70,6 +70,7 @@ public class Visitor {
 
     private var lock = NSLock()
     public var visited = OrderedSet<Int>()
+    public var blocked: OrderedSetClass<Int>?
 
     public var from: VisitFrom
 
@@ -77,13 +78,17 @@ public class Visitor {
         self.from = from
         nowHeres(ids)
     }
-    public init (_ id: Int, from: VisitFrom = .model ) {
+    public init (_ id: Int,
+                 from: VisitFrom = .model,
+                 blocked: OrderedSetClass<Int>? = nil ) {
+
         self.from = from
         nowHere(id)
     }
     public init (_ from: VisitFrom) {
         self.from = from
     }
+
     public func remove(_ id: Int) {
         lock.lock()
         visited.remove(id)
@@ -92,6 +97,14 @@ public class Visitor {
     public func nowHere(_ id: Int) {
         lock.lock()
         visited.append(id)
+        lock.unlock()
+    }
+    public func block(_ id: Int) {
+        lock.lock()
+        if blocked == nil {
+            blocked = OrderedSetClass<Int>([id])
+        }
+        blocked?.append(id)
         lock.unlock()
     }
     public func nowHeres(_ ids: [Int?]) {
@@ -105,9 +118,10 @@ public class Visitor {
     }
     public func wasHere(_ id: Int) -> Bool {
         lock.lock()
-        let contains = visited.contains(id)
+        let visited = visited.contains(id)
+        let blocking = blocked?.contains(id) ?? false
         lock.unlock()
-        return contains
+        return visited || blocking
     }
     public func isLocal() -> Bool {
         return !from.remote
