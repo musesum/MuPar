@@ -25,14 +25,14 @@ flo ≈ pathName (exprs | child | many | copyall | copyat | edges | embed | comm
 
         scalar ≈ (thru | thri | modu | now | num) {
             thru ≈ num ("..." | "…") num dflt? now?
-            thri ≈ num "_" num dflt? now?
+            thri ≈ num ("_") num dflt? now?
             modu ≈ "%" num dflt? now?
             dflt ≈ "~" num
             now  ≈ "=" num
         }
     }
     edges ≈ edgeOp (edgePar | exprs | edgeVal) comment* {
-        edgeOp  ≈ '^([\^]|[<←][<!@\©⟐⟡◇→>]+|[!@⟐⟡◇→>]+[>→])'
+        edgeOp  ≈ '^([\^]|[<][<!@\©⟐⟡◇>]+|[!@⟐⟡◇>]+[>])'
         edgePar ≈ "(" edgeItem+ ")" edges?
         edgeItem ≈ edgeVal comment*
         edgeVal ≈ pathName (edges+ | exprs)?

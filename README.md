@@ -167,7 +167,7 @@ flo ≈ pathName (exprs | child | many | copyall | copyat | edges | embed | comm
         }
     }
     edges ≈ edgeOp (edgePar | exprs | edgeVal) comment* {
-        edgeOp  ≈ '^([\^]|[<←][<!@\©⟐⟡◇→>]+|[!@⟐⟡◇→>]+[>→])'
+        edgeOp  ≈ '^([\^]|[<][<!@\©⟐⟡◇>]+|[!@⟐⟡◇>]+[>])'
         edgePar ≈ "(" edgeItem+ ")" edges?
         edgeItem ≈ edgeVal comment*
         edgeVal ≈ pathName (edges+ | exprs)?
