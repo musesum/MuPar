@@ -499,7 +499,7 @@ midi { // musical instrument device interface
         controller(cc 0_127, val 0_127, chan 1_32, port 1_16, time) >> (midi.cc.skypad.zoom, midi.cc.skypad.convex, midi.cc.skypad.colorY, midi.cc.skypad.camix, midi.cc.skypad.fade, midi.cc.skypad.plane, midi.cc.skypad.shiftX, midi.cc.skypad.shiftY, midi.cc.skypad.repeatX, midi.cc.skypad.repeatY)
         afterTouch(num 0_127, val 0_127, chan 1_32, port 1_16, time)
         pitchBend(val 0_16384~8192, chan 1_32, port 1_16, time)
-        programChange(num 0_255, chan 1_32, port 1_16, time) // ??
+        program(num 0_255, chan 1_32, port 1_16, time)
         nrpn(num 0_16383, val 0…1, chan, time) >> (midi.skypad.plane, midi.skypad.fade)
     }
     output @input {
@@ -510,7 +510,7 @@ midi { // musical instrument device interface
         controller(cc 0_127, val 0_127, chan 1_32, port 1_16, time) << (midi.cc.skypad.zoom, midi.cc.skypad.convex, midi.cc.skypad.colorY, midi.cc.skypad.camix, midi.cc.skypad.fade, midi.cc.skypad.plane, midi.cc.skypad.shiftX, midi.cc.skypad.shiftY, midi.cc.skypad.repeatX, midi.cc.skypad.repeatY)
         afterTouch(num 0_127, val 0_127, chan 1_32, port 1_16, time)
         pitchBend(val 0_16384~8192, chan 1_32, port 1_16, time)
-        programChange(num 0_255, chan 1_32, port 1_16, time) // ??
+        program(num 0_255, chan 1_32, port 1_16, time) 
         nrpn(num 0_16383, val 0…1, chan, time)
     }
     skypad {
@@ -582,8 +582,8 @@ midi { // musical instrument device interface
             breathCtrl(num == 2, val, chan, time)
             footPedal(num == 4, val, chan, time)
             dataEntry(num == 6, val, chan, time)
-            effectControl1(num == 12, val, chan, time)
-            effectControl2(num == 13, val, chan, time)
+            effectCtrl1(num == 12, val, chan, time)
+            effectCtrl2(num == 13, val, chan, time)
         }
         _sound {
             soundVariation(num == 70, val, chan, time)
