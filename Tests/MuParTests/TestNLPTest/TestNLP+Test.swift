@@ -44,7 +44,7 @@ extension TestNLP {
                 print("\(foundString) ⟹ hops:\(totalHops) ✔︎")
                 return 0
             } else {
-                print("🚫 failed")
+                print("⁉️ failed")
                 return 1
             }
         }

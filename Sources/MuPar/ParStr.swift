@@ -48,7 +48,7 @@ public class ParStr {
             let resourcePath = resource.path
             return try String(contentsOfFile: resourcePath) }
         catch {
-            print("🚫 ParStr::\(#function) error:\(error) loading contents of:\(resource.path)")
+            print("⁉️ ParStr::\(#function) error:\(error) loading contents of:\(resource.path)")
         }
         return ""
     }
@@ -185,7 +185,7 @@ public class ParStr {
             return regx
         }
         catch {
-            print("🚫 ParNode(pat::) failed regx:\(pattern)")
+            print("⁉️ ParNode(pat::) failed regx:\(pattern)")
             return nil
         }
     }

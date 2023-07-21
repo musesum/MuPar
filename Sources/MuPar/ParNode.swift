@@ -169,7 +169,7 @@ public class ParNode {
                 foundNode.matchStr = matchStr
             }
         } else {
-            print("🚫 setMatch couldn't find: \(str)")
+            print("⁉️ setMatch couldn't find: \(str)")
         }
     }
     
@@ -177,7 +177,7 @@ public class ParNode {
         if let parItem = findMatch(parStr).parLast {
             nodeValCall(parItem)
         } else {
-            print("🚫 \(#function)(\"\(parStr.str)\") not found")
+            print("⁉️ \(#function)(\"\(parStr.str)\") not found")
         }
     }
 }

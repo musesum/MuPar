@@ -6,7 +6,7 @@ import XCTest
 
 /// parse script into graph and then generate output script from graph.
 /// If the actual output is different from the expected output
-/// then generate an error meassage with a 🚫 at where they differ.
+/// then generate an error meassage with a ⁉️ at where they differ.
 public func testParse(_ original_: String, _ expected_: String = "") -> Int {
 
     Par.trace = false // for debugging errors
@@ -27,7 +27,7 @@ public func testParse(_ original_: String, _ expected_: String = "") -> Int {
         return ParStr.testCompare(expected, actual)
     }
     else {
-        print(" 🚫 failed parse")
+        print(" ⁉️ failed parse")
         return 1 // error
     }
 }
@@ -39,8 +39,8 @@ final class ParTests: XCTestCase {
     func testBasics() {
         print("\n------------------------------------")
         var err = 0 // error count
-        //let _ = testParse(Bug1Par) //🚫bug! single rvalue `ask`
-        //let _ = testParse(Bug2Par) //🚫bug! double ((…) …)
+        //let _ = testParse(Bug1Par) //⁉️bug! single rvalue `ask`
+        //let _ = testParse(Bug2Par) //⁉️bug! double ((…) …)
         
         err += testParse(Namespace1Par)
         err += testParse(Namespace2Par)

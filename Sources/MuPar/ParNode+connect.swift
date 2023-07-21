@@ -85,7 +85,7 @@ public extension ParNode {
                     return
                 }
             }
-            print("🚫 could not find reference: \"\(pattern)\".\(id)")
+            print("⁉️ could not find reference: \"\(pattern)\".\(id)")
         }
         
         // main body

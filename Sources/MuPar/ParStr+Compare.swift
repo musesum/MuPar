@@ -9,7 +9,7 @@ import Foundation
 
 public extension ParStr {
     /// compare expected with actual result and print error strings
-    /// with 🚫 marker at beginning of non-matching section
+    /// with ⁉️ marker at beginning of non-matching section
     ///
     /// - parameter script: expected output
     /// - parameter script: actual output
@@ -18,9 +18,9 @@ public extension ParStr {
         if echo {
             print ("⟹ " + expected, terminator: "")
         }
-        // for non-match, compare will insert a 🚫 into expectedErr and actualErr
+        // for non-match, compare will insert a ⁉️ into expectedErr and actualErr
         if let (expectedErr, actualErr) = ParStr.compare(expected, actual) {
-            print (" 🚫 mismatch")
+            print (" ⁉️ mismatch")
             print ("expect ⟹ " + expectedErr)
             print ("actual ⟹ " + actualErr + "\n")
             return 1 // error
@@ -63,8 +63,8 @@ public extension ParStr {
         
         func makeError() -> (String, String)? {
             
-            let error1 = str1[..<i1] + "🚫" + str1[i1..<str1.endIndex]
-            let error2 = str2[..<i2] + "🚫" + str2[i2..<str2.endIndex]
+            let error1 = str1[..<i1] + "⁉️" + str1[i1..<str1.endIndex]
+            let error2 = str2[..<i2] + "⁉️" + str2[i2..<str2.endIndex]
             return (String(error1), String(error2))
         }
         

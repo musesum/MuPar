@@ -11,14 +11,14 @@
 
 import Foundation
 
-let Bug1Par = // 🚫bug! single rvalue `ask`
+let Bug1Par = // ⁉️bug! single rvalue `ask`
 #"""
 test ≈ ask {
 ask ≈ "test" ("please" | "yo")?
 }
 """#
 
-let Bug2Par =  // 🚫bug! double ((…) …)
+let Bug2Par =  // ⁉️bug! double ((…) …)
 #"""
  a ≈ b ((c | d) | e) {
     b ≈ "bb"

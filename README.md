@@ -77,7 +77,7 @@ which in the real world could attach to a dynamic calendar, or any other 3rd par
 Here is the output from ParTests/TestNLP+Test.swift :
 ```swift
 ⟹ before attaching eventListChecker() - `yo` is unknown
-"test show event yo" ⟹ 🚫 failed
+"test show event yo" ⟹ ⁉️ failed
 
 ⟹ runtime is attaching eventListChecker() callback to eventList()
 "test show event eventList()"  ⟹  eventList.924 = (Function)
@@ -106,10 +106,10 @@ Output from ParTests/TestNLP+Test.swift:
 ```swift
 ⟹ with no shortTermMemory, partial matches fail
 "test show event yo" ⟹  test: 0 show: 0 event: 0 yo: 0 ⟹ hops: 0 ✔︎
-"test hide yo" ⟹ 🚫 failed
-"test hide event" ⟹ 🚫 failed
-"hide event" ⟹ 🚫 failed
-"hide" ⟹ 🚫 failed
+"test hide yo" ⟹ ⁉️ failed
+"test hide event" ⟹ ⁉️ failed
+"hide event" ⟹ ⁉️ failed
+"hide" ⟹ ⁉️ failed
 
 ⟹ after setting ParRecents.shortTermMemory = 8 seconds
 "test show event yo" ⟹  test: 0 show: 0 event: 0 yo: 0 ⟹ hops: 0 ✔︎
